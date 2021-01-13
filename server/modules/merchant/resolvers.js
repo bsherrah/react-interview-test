@@ -1,8 +1,8 @@
-const { merchants } = require("../../../mockMerchantData")
+const Merchant = require('../../models/MerchantModel');
 
 const resolvers = {
   Query: {
-    merchants: () => merchants
+    merchants: () => Merchant.find(),
   },
 };
 

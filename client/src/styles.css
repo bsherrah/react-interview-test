@@ -1,0 +1,22 @@
+:root {
+  --main-gray: #5f5f5f;
+}
+body {
+  margin: 0 auto;
+  font-size: 1rem;
+  color: var(--main-gray);
+}
+.page {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 4rem;
+  padding: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+p,
+h1,
+h2 {
+  text-align: center;
+}

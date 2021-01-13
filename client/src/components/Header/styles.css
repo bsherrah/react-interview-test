@@ -1,0 +1,45 @@
+#header {
+  position: fixed;
+  height: 4rem;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-width: 1.2px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--main-gray);
+  background-color: white;
+  z-index: 1;
+}
+#bonsai {
+  font-size: 2rem;
+  margin-left: 1.5rem;
+}
+#menu {
+  display: flex;
+}
+#menu a {
+  margin-right: 2rem;
+  color: var(--main-gray);
+}
+.checkout-badge-container {
+  display: flex;
+  flex-direction: column;
+}
+.cart-items-count {
+  display: flex;
+  justify-content: center;
+  color: white;
+  background-color: rgb(43, 98, 226);
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.circle-picture {
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+}
+#logout {
+  margin-right: 1.5rem;
+}

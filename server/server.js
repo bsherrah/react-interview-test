@@ -1,23 +1,30 @@
-// #1 Import Express and Apollo Server
 const express = require('express');
-const { ApolloServer } = require('apollo-server-express');
+const server = require('./apollo');
+const connectToDB = require('./db');
+const seedDB = require('./dbSeeder');
+const cors = require('cors');
+const env = require('dotenv');
+env.config();
 
-// #3 Import GraphQL type definitions
-const typeDefs = require('./modules/merchant/graphqlSchema');
+const { SERVER_URL, CLIENT_URL, PORT } = process.env;
 
-// #4 Import GraphQL resolvers
-const resolvers = require('./modules/merchant/resolvers');
-
-// #5 Initialize an Apollo server
-const server = new ApolloServer({ typeDefs, resolvers });
-
-// #6 Initialize an Express application
 const app = express();
 
-// #7 Use the Express application as middleware in Apollo server
+const corsOptions = {
+  origin: CLIENT_URL,
+  credentials: true,
+};
+app.use(cors(corsOptions));
+
 server.applyMiddleware({ app });
 
-// #8 Set the port that the Express application will listen to
-app.listen({ port: 3000 }, () => {
-  console.log(`Server running on http://localhost:3000${server.graphqlPath}`);
-});
+const run = async () => {
+  await connectToDB();
+  await seedDB();
+
+  app.listen({ port: PORT }, () => {
+    console.log(`Server running on ${SERVER_URL}:${PORT}${server.graphqlPath}`);
+  });
+};
+
+run();

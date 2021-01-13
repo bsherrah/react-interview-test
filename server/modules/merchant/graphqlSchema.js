@@ -15,7 +15,7 @@ const typeDefs = gql`
     phone: String
     address: String
     publishedDate: String
-    publishedBy: User
+    publishedBy: MerchantUser
     companyDescription: String
   }
   type Product {
@@ -29,7 +29,7 @@ const typeDefs = gql`
     quantity: Int
     image: String
   }
-  type User {
+  type MerchantUser {
     userId: String
   }
   type Query {
