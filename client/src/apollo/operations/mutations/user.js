@@ -37,6 +37,17 @@ export const ADD_TO_CART = gql`
   }
 `;
 
+export const REMOVE_FROM_CART = gql`
+  mutation RemoveFromCart($productId: String!) {
+    removeFromCart(productId: $productId) {
+      cartItems {
+        productId
+        qty
+      }
+    }
+  }
+`;
+
 export const LIKE_PRODUCT = gql`
   mutation LikeProduct($productId: String!, $liked: Boolean!) {
     likeProduct(productId: $productId, liked: $liked) {

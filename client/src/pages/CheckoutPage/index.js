@@ -5,7 +5,7 @@ import { useAppState } from '../../hooks';
 import Fetching from '../../components/Fetching';
 import { GET_MERCHANTS } from '../../apollo/operations/queries';
 import { Button } from 'reactstrap';
-import { RESET_CART } from '../../apollo/operations/mutations';
+import { RESET_CART, REMOVE_FROM_CART } from '../../apollo/operations/mutations';
 
 import './styles.css';
 
@@ -56,7 +56,7 @@ const CheckoutPage = () => {
     <div className="page">
       <div className="checkout-container">
         <h2>Items in cart: </h2>
-        {isCartCheckedOut && <p> Your order on it's way !!</p>}
+        {isCartCheckedOut && <p> Order confirmed, it's on the way...</p>}
         {!isCartCheckedOut && <CheckOutItems products={products} user={user} />}
         {user.cartItems && (
           <Button color="primary" size="lg" block onClick={buy}>
@@ -72,15 +72,18 @@ const CheckOutItems = ({ products, user }) => {
   const { cartItems } = user;
   const { setUser } = useAppState();
 
-  const removeItem = (productId) => {
-    const newCartItems = cartItems.filter(
-      (item) => item.productId !== productId
-    );
-    setUser({
-      ...user,
-      cartItems: newCartItems,
-    });
-  };
+  const [removeFromCart] = useMutation(REMOVE_FROM_CART, {
+    onCompleted(data) {
+      console.log("compieted")
+      const {
+        removeFromCart: { cartItems },
+      } = data;
+      setUser({
+        ...user,
+        cartItems,
+      });
+    },
+  });
 
   if (cartItems.length === 0)
     return <p id="no-items-in-cart">No items in the cart!</p>;
@@ -96,7 +99,7 @@ const CheckOutItems = ({ products, user }) => {
           <div key={item.productId} className="checkout-item">
             <span
               className="remove-item"
-              onClick={() => removeItem(item.productId)}>
+              onClick={() => removeFromCart({ variables: { productId: item.productId} })}>
               X
             </span>
             <img className="image-small" src={image} />

@@ -23,6 +23,7 @@ const typeDefs = gql`
   type Mutation {
     login: User!
     addToCart(productId: String!, qty: Int!): User!
+    removeFromCart(productId: String!): User!
     resetCart: User!
     likeProduct(productId: String!, liked: Boolean!): User!
   }
