@@ -1,0 +1,18 @@
+.image-small {
+  width: 7rem;
+  height: 7rem;
+  margin-right: 2rem;
+}
+.checkout-container {
+  display: flex;
+  flex-direction: column;
+}
+.checkout-item {
+  display: flex;
+  margin: 2rem;
+}
+.remove-item {
+  font-size: 1.3rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
