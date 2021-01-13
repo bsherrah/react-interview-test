@@ -30,7 +30,6 @@ const LoginPage = () => {
     setIsLoginPopupOpen(false);
     localStore.setToken(res.tokenId);
     login();
-    const newAuthRes = await res.reloadAuthResponse();
     refreshToken(res);
   });
 
@@ -66,8 +65,6 @@ const LoginPage = () => {
   }, []);
 
   if (isLoginPopupOpen || loading) return <Fetching />;
-
-  // if(error) return <Error />
 
   return (
     <div className="page">
