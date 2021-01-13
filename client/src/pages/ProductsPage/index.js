@@ -32,8 +32,6 @@ function ProductsPage() {
     },
   });
 
-  // if (error) return <Error />;
-
   if (loading || !data) return <Fetching />;
 
   return (

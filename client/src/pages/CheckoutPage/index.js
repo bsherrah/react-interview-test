@@ -5,7 +5,10 @@ import { useAppState } from '../../hooks';
 import Fetching from '../../components/Fetching';
 import { GET_MERCHANTS } from '../../apollo/operations/queries';
 import { Button } from 'reactstrap';
-import { RESET_CART, REMOVE_FROM_CART } from '../../apollo/operations/mutations';
+import {
+  RESET_CART,
+  REMOVE_FROM_CART,
+} from '../../apollo/operations/mutations';
 
 import './styles.css';
 
@@ -74,7 +77,7 @@ const CheckOutItems = ({ products, user }) => {
 
   const [removeFromCart] = useMutation(REMOVE_FROM_CART, {
     onCompleted(data) {
-      console.log("compieted")
+      console.log('compieted');
       const {
         removeFromCart: { cartItems },
       } = data;
@@ -99,7 +102,9 @@ const CheckOutItems = ({ products, user }) => {
           <div key={item.productId} className="checkout-item">
             <span
               className="remove-item"
-              onClick={() => removeFromCart({ variables: { productId: item.productId} })}>
+              onClick={() =>
+                removeFromCart({ variables: { productId: item.productId } })
+              }>
               X
             </span>
             <img className="image-small" src={image} />

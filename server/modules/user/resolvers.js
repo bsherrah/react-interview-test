@@ -37,10 +37,12 @@ const resolvers = {
     },
 
     removeFromCart: async (_, { productId }, { payload: { email } }) => {
-      console.log("to remove: id: ",productId," email: ",email)
+      console.log('to remove: id: ', productId, ' email: ', email);
       const user = await User.findOne({ email });
       const cartItems = user.cartItems;
-      const newCartItems = cartItems.filter(item=>item.productId!==productId)
+      const newCartItems = cartItems.filter(
+        (item) => item.productId !== productId
+      );
       const updatedUser = await User.findOneAndUpdate(
         { email },
         { $set: { cartItems: newCartItems } },
